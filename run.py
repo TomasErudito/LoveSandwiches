@@ -85,6 +85,18 @@ def calculate_surplus_data(sales_row):
     return surplus_data
 
 
+def get_last_five():
+    """
+    Collect 5 entries
+    """
+    sales= SHEET.worksheet("sales")
+    columns = []
+    for ind in range(1,7):
+        column = sales.col_values(ind)
+        columns.append(column[-5:-1])
+    print(columns)
+
+
 def main():
     """
     Run all program functions
@@ -94,6 +106,7 @@ def main():
     update_worksheet(sales_data, "sales")
     new_surplus_data = calculate_surplus_data(sales_data)
     update_worksheet(new_surplus_data, "surplus")
+    get_last_five()
 
 
 print("welcome to my program")
