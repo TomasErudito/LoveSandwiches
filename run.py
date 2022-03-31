@@ -94,7 +94,22 @@ def get_last_five():
     for ind in range(1,7):
         column = sales.col_values(ind)
         columns.append(column[-5:-1])
-    print(columns)
+    return columns
+
+
+def calculate_stock(data):
+    """
+    Calculate average and add 10%
+    """
+    print("Calculating stock data\n")
+    new_stock_data = []
+    for column in data:
+        int_column = [int(num) for num in column]
+        average_stock = sum(int_column)/ len(int_column)
+        stock_num = average_stock * 1.1
+        new_stock_data.append(round(stock_num))
+
+    return new_stock_data
 
 
 def main():
@@ -106,7 +121,9 @@ def main():
     update_worksheet(sales_data, "sales")
     new_surplus_data = calculate_surplus_data(sales_data)
     update_worksheet(new_surplus_data, "surplus")
-    get_last_five()
+    sales_column = get_last_five()
+    stock_data = calculate_stock(sales_column)
+    update_worksheet(stock_data, "stock")
 
 
 print("welcome to my program")
